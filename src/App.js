@@ -76,32 +76,42 @@ export default function Game() {
     setCurrentMove(nextMove)
   }
 
-    const moves = history.map((squares, move) => {
-      let description
-      if (move > 0) {
-        description = 'Go to move #' + move
-      } else {
-        description = 'Go to game start'
-      }
-      return (
-        <li key={move}>
-          <button onClick={() => jumpTo(move)} > {description}</button>
-        </li>
-      )
-    })
+  const moves = history.map((squares, move) => {
+    let description
+    if (move > 0) {
+      description = 'Go to move #' + move
+    } else {
+      description = 'Go to game start'
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)} className="btn btn-outline btn-info m-1" >
+          {description}
+        </button>
+      </li>
+    )
+  })
 
   return (
-    <div className="game">
+    <>
+    <h1 className="text-center text-4xl font-bold mb-3">
+      Tic Tac Toe
+      </h1>
+      
+    <div className="game flex-col justify-center">
+      
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
+      
       <div className="game-info">
-        <ol>{moves}</ol>
-        <ul>
+        <ol className="btn-group btn-group-vertical">
+          {moves}
+        </ol>
         <MoveDisplay move={currentMove} />
-        </ul>
       </div>
     </div>
+    </>
   );
 }
 
